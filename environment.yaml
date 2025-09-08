@@ -6,4 +6,4 @@ dependencies:
   - openssl
   - jupyter-server-proxy
   - jupyter-vscode-proxy
-  - code-server
+ 

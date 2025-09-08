@@ -1,14 +1,9 @@
 black
-bokeh
 databricks-connect==15.4.*
-holoviews
 isort
 jupyterlab_code_formatter
 jupyterlab-git
-mkdocs
-mkdocs-material
 pre-commit
-psycopg2-binary
 python-dotenv
 ruff
-sqlmesh[web,mssql,databricks]
+sqlmesh[web,mssql,databricks]~=0.216

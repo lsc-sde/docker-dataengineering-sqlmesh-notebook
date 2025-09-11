@@ -6,4 +6,4 @@ jupyterlab-git
 pre-commit
 python-dotenv
 ruff
-sqlmesh[web,mssql,databricks]~=0.216
+sqlmesh[web,mssql,databricks,lsp]~=0.217

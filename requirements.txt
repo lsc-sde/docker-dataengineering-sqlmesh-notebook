@@ -1,5 +1,5 @@
 black
-databricks-connect==15.4.*
+databricks-connect==18.1.*
 isort
 jupyterlab_code_formatter
 jupyterlab-git

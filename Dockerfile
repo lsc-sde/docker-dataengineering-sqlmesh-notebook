@@ -23,22 +23,37 @@ RUN mamba install code-server \
   && fix-permissions "${CONDA_DIR}" \
   && fix-permissions "/home/${NB_USER}"
 
-RUN code-server --install-extension charliermarsh.ruff 
-RUN code-server --install-extension databricks.databricks 
-RUN code-server --install-extension databricks.sqltools-databricks-driver 
-RUN code-server --install-extension davidanson.vscode-markdownlint 
+
+
+# Install all extensions in one layer: aids faster build and smaller image
+RUN code-server --install-extension charliermarsh.ruff \
+  && code-server --install-extension databricks.databricks \
+  && code-server --install-extension databricks.sqltools-databricks-driver \
+  && code-server --install-extension davidanson.vscode-markdownlint \
+  && code-server --install-extension ms-python.black-formatter \
+  && code-server --install-extension ms-python.python \
+  && code-server --install-extension mtxr.sqltools \
+  && code-server --install-extension njpwerner.autodocstring \
+  && code-server --install-extension tobikodata.sqlmesh \
+  && code-server --install-extension vsix/github.copilot-1.350.0-web.vsix --force \
+  && code-server --install-extension vsix/github.copilot-chat-0.29.0.vsix --force
+  
+# RUN code-server --install-extension charliermarsh.ruff 
+# RUN code-server --install-extension databricks.databricks 
+# RUN code-server --install-extension databricks.sqltools-databricks-driver 
+# RUN code-server --install-extension davidanson.vscode-markdownlint 
 # RUN code-server --install-extension jannisx11.batch-rename-extension 
-RUN code-server --install-extension ms-python.black-formatter 
-RUN code-server --install-extension ms-python.python 
+# RUN code-server --install-extension ms-python.black-formatter 
+# RUN code-server --install-extension ms-python.python 
 # RUN code-server --install-extension ms-toolsai.jupyter 
 # RUN code-server --install-extension ms-toolsai.jupyter-renderers 
 # RUN code-server --install-extension ms-toolsai.vscode-jupyter-cell-tags 
 # RUN code-server --install-extension ms-toolsai.vscode-jupyter-keymap 
-RUN code-server --install-extension mtxr.sqltools 
-RUN code-server --install-extension njpwerner.autodocstring 
-RUN code-server --install-extension tobikodata.sqlmesh 
-RUN code-server --install-extension vsix/github.copilot-1.350.0-web.vsix 
-RUN code-server --install-extension vsix/github.copilot-chat-0.29.0.vsix
+# RUN code-server --install-extension mtxr.sqltools 
+# RUN code-server --install-extension njpwerner.autodocstring 
+# RUN code-server --install-extension tobikodata.sqlmesh 
+# RUN code-server --install-extension vsix/github.copilot-1.350.0-web.vsix 
+# RUN code-server --install-extension vsix/github.copilot-chat-0.29.0.vsix
 
 RUN rm -rf vsix
 # Copy custom config for jupyter

@@ -1,9 +1,9 @@
 black
-databricks-connect==15.4.*
+databricks-connect==18.1.*
 isort
 jupyterlab_code_formatter
 jupyterlab-git
 pre-commit
 python-dotenv
 ruff
-sqlmesh[web,mssql,databricks,lsp]~=0.217
+sqlmesh[web,mssql,databricks,lsp]~=0.234.1

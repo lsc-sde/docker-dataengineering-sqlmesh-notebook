@@ -4,7 +4,7 @@
 # - Code Server
 
 ARG OWNER=lscsde
-ARG BASE_CONTAINER=quay.io/jupyter/minimal-notebook:python-3.12.11
+ARG BASE_CONTAINER=quay.io/jupyter/minimal-notebook:python-3.13.13
 FROM $BASE_CONTAINER
 ARG TARGETOS TARGETARCH
 LABEL maintainer="lscsde"
@@ -15,8 +15,6 @@ LABEL image="dataengineering-sqlmesh-notebook"
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 USER root
-
-COPY vsix vsix
 
 RUN mamba install code-server \
   && mamba clean --all -f -y \
@@ -35,8 +33,7 @@ RUN code-server --install-extension charliermarsh.ruff \
   && code-server --install-extension mtxr.sqltools \
   && code-server --install-extension njpwerner.autodocstring \
   && code-server --install-extension tobikodata.sqlmesh \
-  && code-server --install-extension vsix/github.copilot-1.350.0-web.vsix --force \
-  && code-server --install-extension vsix/github.copilot-chat-0.29.0.vsix --force
+  && rm -rf vsix
   
 # RUN code-server --install-extension charliermarsh.ruff 
 # RUN code-server --install-extension databricks.databricks 
@@ -55,7 +52,6 @@ RUN code-server --install-extension charliermarsh.ruff \
 # RUN code-server --install-extension vsix/github.copilot-1.350.0-web.vsix 
 # RUN code-server --install-extension vsix/github.copilot-chat-0.29.0.vsix
 
-RUN rm -rf vsix
 # Copy custom config for jupyter
 COPY jupyter_notebook_config.json /etc/jupyter/jupyter_notebook_config.json
 
